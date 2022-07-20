@@ -1,8 +1,44 @@
 import React from "react";
 import Product from "../product/Product";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import "../../styles/ProductsList.css";
 
 const ProductsList = () => {
+  const [dataProducts, setDataProducts] = useState(null);
+  const [dataUserInfo, setUserInfo] = useState(null);
+  const [parsedInfo, setParsedInfo] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response_products = await axios.get(
+          `https://private-anon-e22dc6085f-inventurestest.apiary-mock.com/products`
+        );
+        const response_user_info = await axios.get(
+          `https://private-anon-e22dc6085f-inventurestest.apiary-mock.com/purchases`
+        );
+
+        setDataProducts(response_products.data);
+        setUserInfo(response_user_info.data);
+        setParsedInfo((response_products, response_user_info));
+
+        setError(null);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getData();
+  }, []);
+
+  console.log(`Here data products: ${dataProducts}`);
+  console.log(`Here User info: ${dataUserInfo}`);
+  console.log(`Here parsed info: ${parsedInfo}`);
+
   const info = {
     url: "https://d131ml7m6yr3wl.cloudfront.net/images/8632a5f3-546e-4a60-a4a0-55d7aaa8d8c6/large.jpeg",
     name: "Eutirox",
@@ -29,6 +65,8 @@ const ProductsList = () => {
       <div class="header-list">
         <h4 class="title">Te queda:</h4>
       </div>
+      {loading && <div>Cargando...</div>}
+      {error && <div>Error: {error}</div>}
       <div class="products-list">
         <Product
           url={info.url}
