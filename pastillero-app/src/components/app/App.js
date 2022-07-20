@@ -1,14 +1,14 @@
 import '../../styles/App.css';
 import Navbar from '../navbar/Navbar';
 import Info from '../info/Info';
-import Product from '../product/Product';
+import ProductsList from '../ProductsList/ProductsList';
 
 function App() {
   return (
     <div className="App">
       <Navbar/>
       <Info/>
-      <Product/>
+      <ProductsList/>
     </div>
   );
 }
