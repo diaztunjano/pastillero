@@ -4,9 +4,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "../../styles/ProductsList.css";
 
-async function getDoses(purchases) {
+async function getProductsInfo(products, user_info) {
   const doses = {};
-  const orders = purchases.payload;
+  const orders = user_info.payload;
   const days_passed = Math.trunc(
     (new Date().getTime() - new Date(orders[0].received_date).getTime()) /
       (1000 * 60 * 60 * 24)
@@ -14,9 +14,9 @@ async function getDoses(purchases) {
   await orders.forEach((order) => {
     const products = order.details;
     products.forEach((product) => {
-      console.log(
-        `Here product ID: ${product.product_id} || Qty: ${product.quantity}`
-      );
+      // console.log(
+      //   `Here product ID: ${product.product_id} || Qty: ${product.quantity}`
+      // );
       if (doses[product.product_id]) {
         doses[product.product_id] += product.quantity;
       } else {
@@ -25,13 +25,22 @@ async function getDoses(purchases) {
     });
   });
 
-  // console.log(`Here doses: ${JSON.stringify(doses)}`);
-  // console.log(`Days: ${days_passed}`);
-  return doses;
-}
+  const products_info = products.payload;
+  const products_info_parsed = {};
+  await products_info.forEach((product) => {
+    products_info_parsed[product.id] = {
+      url: product.imagesUrl,
+      name: product.name,
+      concentration: product.concentration,
+      qty_left: doses[`${product.id}`],
+      days_left: doses[`${product.id}`],
+    };
+    console.log(`Doses: ${doses}`);
+    console.log(`Here dose for ID ${product.id}: ${doses[`${product.id}`]}`);
+  });
+  console.log(`Here products_info_parsed: ${JSON.stringify(products_info_parsed)}`);
 
-async function getProductsInfo(products) {
-  
+  return products_info_parsed;
 }
 
 const ProductsList = () => {
@@ -65,7 +74,8 @@ const ProductsList = () => {
     getData();
   }, []);
 
-  const doses = getDoses(dataUserInfo);
+  const products_info = getProductsInfo(dataProducts, dataUserInfo);
+
 
   const info = {
     url: "https://d131ml7m6yr3wl.cloudfront.net/images/8632a5f3-546e-4a60-a4a0-55d7aaa8d8c6/large.jpeg",
@@ -96,6 +106,7 @@ const ProductsList = () => {
       {loading && <div>Cargando...</div>}
       {error && <div>Error: {error}</div>}
       <div class="products-list">
+        
         <Product
           url={info.url}
           name={info.name}
