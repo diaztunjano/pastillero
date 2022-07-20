@@ -10,9 +10,9 @@ const Product = ({ url, name, concentration, qty_left, days_left }) => {
       </div>
       <div class="product-text-info">
         <h4>{name}</h4>
-        <p>{concentration}</p>
-        <p class="underline">Quedan {qty_left} comprimidos</p>
-        <p class="underline">Para {days_left} días</p>
+        <p class="concentration">{concentration}</p>
+        <p class="underline-normal">Quedan {qty_left} comprimidos</p>
+        <p class="underline-normal">Para {days_left} días</p>
       </div>
       <div class="cart-icon">
         <AddShoppingCartIcon />
