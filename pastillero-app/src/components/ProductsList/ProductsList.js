@@ -21,7 +21,7 @@ async function getProductsInfo(products, user_info) {
       if (doses[product.product_id]) {
         doses[product.product_id] += product.quantity;
       } else {
-        doses[product.product_id] = product.quantity + 60 - days_passed;
+        doses[product.product_id] = product.quantity  - days_passed;
       }
     });
   });
@@ -29,13 +29,15 @@ async function getProductsInfo(products, user_info) {
   const products_info = await products.payload;
   const products_info_parsed = [];
   await products_info.forEach((product) => {
+    const product_info = {
+      url: product.imagesUrl,
+      name: product.name,
+      concentration: product.concentration,
+      qty_left: doses[product.id],
+      days_left: doses[product.id] 
+    }
     if (product.id in doses) {
-      products_info_parsed.push([
-        product.imagesUrl,
-        product.name,
-        product.concentration,
-        doses[`${product.id}`],
-      ]);
+      products_info_parsed.push(product_info);
     }
   });
 
@@ -94,12 +96,12 @@ const ProductsList = () => {
           {finalInfo.map((product) => {
             return (
               <Product
-                key={product[0]}
-                url={product[0]}
-                name={product[1]}
-                concentration={product[2]}
-                qty_left={product[3]}
-                days_left={product[3]}
+                key={product.url}
+                url={product.url}
+                name={product.name}
+                concentration={product.concentration}
+                qty_left={product.qty_left}
+                days_left={product.days_left}
               />
             );
           })}
