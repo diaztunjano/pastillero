@@ -5,6 +5,8 @@
     justify-content: space-between;
     align-items: center;
     background-color: white;
+    padding: 0.5em;
+    margin-bottom:0.3em;
 }
 
 .product-image img{
