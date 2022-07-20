@@ -10,7 +10,7 @@ const Navbar = () => {
     <AppBar>
         <Toolbar>
             <MenuIcon/>
-            <h1>Mi pastillero</h1>
+            <p>Mi pastillero</p>
             <SearchIcon/>
             <ShoppingCartIcon/>
         </Toolbar>
