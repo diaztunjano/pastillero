@@ -11,7 +11,7 @@ const Navbar = () => {
       <AppBar position="static">
         <Toolbar>
           <MenuIcon />
-          <p>Mi pastillero</p>
+          <p class="title">Mi pastillero</p>
           <SearchIcon sx={{ marginLeft: "auto" }} />
           <ShoppingCartIcon sx={{ marginLeft: "25px" }} />
         </Toolbar>
