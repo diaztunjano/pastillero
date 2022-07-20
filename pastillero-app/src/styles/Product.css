@@ -52,6 +52,16 @@
     margin-top: auto;
 }
 
+.product-text-info .underline-critical{
+    font-size: 0.85em;
+    font-weight: 400;
+    color:#F44336;
+    margin-bottom: 0.1em;
+    letter-spacing: 0.15px;
+    text-decoration-line:underline;
+    margin-top: auto;
+}
+
 .cart-icon{
     align-self: flex;
     padding-right: 5%;

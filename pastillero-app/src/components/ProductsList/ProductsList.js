@@ -7,7 +7,7 @@ const ProductsList = () => {
     url: "https://d131ml7m6yr3wl.cloudfront.net/images/8632a5f3-546e-4a60-a4a0-55d7aaa8d8c6/large.jpeg",
     name: "Eutirox",
     concentration: "85 mg",
-    qty_left: 18,
+    qty_left: 5,
     days_left: 5,
   };
   const info2 = {
