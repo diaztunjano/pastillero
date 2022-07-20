@@ -35,10 +35,10 @@ async function getProductsInfo(products, user_info) {
       qty_left: doses[`${product.id}`],
       days_left: doses[`${product.id}`],
     };
-    console.log(`Doses: ${doses}`);
-    console.log(`Here dose for ID ${product.id}: ${doses[`${product.id}`]}`);
+    // console.log(`Doses: ${doses}`);
+    // console.log(`Here dose for ID ${product.id}: ${doses[`${product.id}`]}`);
   });
-  console.log(`Here products_info_parsed: ${JSON.stringify(products_info_parsed)}`);
+  // console.log(`Here products_info_parsed: ${JSON.stringify(products_info_parsed)}`);
 
   return products_info_parsed;
 }
@@ -46,7 +46,6 @@ async function getProductsInfo(products, user_info) {
 const ProductsList = () => {
   const [dataProducts, setDataProducts] = useState(null);
   const [dataUserInfo, setUserInfo] = useState(null);
-  const [parsedInfo, setParsedInfo] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -62,7 +61,6 @@ const ProductsList = () => {
 
         setDataProducts(response_products.data);
         setUserInfo(response_user_info.data);
-        setParsedInfo((response_products, response_user_info));
 
         setError(null);
       } catch (err) {
@@ -99,14 +97,25 @@ const ProductsList = () => {
     days_left: 30,
   };
   return (
-    <div class="items">
-      <div class="header-list">
-        <h4 class="title">Te queda:</h4>
+    <div className="items">
+      <div className="header-list">
+        <h4 className="title">Te queda:</h4>
       </div>
       {loading && <div>Cargando...</div>}
       {error && <div>Error: {error}</div>}
-      <div class="products-list">
+      <div className="products-list">
         
+        {/* {products_info && 
+          Object.entries(products_info).map(([key, value]) => (
+            console.log(`Here key: ${key} || value: ${value}`),
+            <Product
+          url={key.url}
+          name={key.name}
+          concentration={key.concentration}
+          qty_left={key.qty_left}
+          days_left={key.days_left}
+        />))} */}
+
         <Product
           url={info.url}
           name={info.name}
