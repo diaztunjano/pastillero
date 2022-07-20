@@ -29,16 +29,15 @@ async function getProductsInfo(products, user_info) {
   const products_info = await products.payload;
   const products_info_parsed = [];
   await products_info.forEach((product) => {
-    products_info_parsed.push([
-      product.imagesUrl,
-      product.name,
-      product.concentration,
-      doses[`${product.id}`],
-    ]);
-    // console.log(`Doses: ${doses}`);
-    // console.log(`Here dose for ID ${product.id}: ${doses[`${product.id}`]}`);
+    if (product.id in doses) {
+      products_info_parsed.push([
+        product.imagesUrl,
+        product.name,
+        product.concentration,
+        doses[`${product.id}`],
+      ]);
+    }
   });
-  // console.log(`Here products_info_parsed: ${JSON.stringify(products_info_parsed)}`);
 
   return products_info_parsed;
 }
@@ -95,7 +94,7 @@ const ProductsList = () => {
           {finalInfo.map((product) => {
             return (
               <Product
-                key={product[1]}
+                key={product[0]}
                 url={product[0]}
                 name={product[1]}
                 concentration={product[2]}
