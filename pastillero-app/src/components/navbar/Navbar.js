@@ -1,21 +1,23 @@
 import React from "react";
-import '../../styles/Navbar.css';
+import "../../styles/Navbar.css";
 import { AppBar, Toolbar } from "@mui/material";
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import SearchIcon from '@mui/icons-material/Search';
-import MenuIcon from '@mui/icons-material/Menu';
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import SearchIcon from "@mui/icons-material/Search";
+import MenuIcon from "@mui/icons-material/Menu";
 
 const Navbar = () => {
-  return <div>
-    <AppBar>
+  return (
+    <div>
+      <AppBar position="static">
         <Toolbar>
-            <MenuIcon/>
-            <p>Mi pastillero</p>
-            <SearchIcon/>
-            <ShoppingCartIcon/>
+          <MenuIcon />
+          <p>Mi pastillero</p>
+          <SearchIcon sx={{ marginLeft: "auto" }} />
+          <ShoppingCartIcon sx={{ marginLeft: "25px" }} />
         </Toolbar>
-    </AppBar>
-  </div>;
+      </AppBar>
+    </div>
+  );
 };
 
 export default Navbar;
